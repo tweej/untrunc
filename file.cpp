@@ -84,12 +84,22 @@ bool File::atEnd() {
     return ftello(file) == size;
 }
 
+uint32_t File::readUint32() {
+    uint32_t value;
+    size_t n = fread(&value, sizeof(uint32_t), 1, file);
+    if(n != 1)
+        throw string("Could not read atom length");
+
+   return swap32(value);
+}
+
 int File::readInt() {
     int value;
     int n = fread(&value, sizeof(int), 1, file);
     if(n != 1)
         throw string("Could not read atom length");
-	return swap32(value);
+
+    return swap32(value);
 }
 
 int64_t File::readInt64() {
@@ -98,7 +108,7 @@ int64_t File::readInt64() {
     if(n != 1)
         throw string("Could not read atom length");
 
-	return swap64(value);
+    return swap64(value);
 }
 
 void File::readChar(char *dest, size_t n) {

@@ -44,6 +44,7 @@ public:
 	bool atEnd();
 	off_t length() { return size; }
 
+	uint32_t readUint32();
 	int readInt();
 	int64_t readInt64();
 	void readChar(char *dest, size_t n);
